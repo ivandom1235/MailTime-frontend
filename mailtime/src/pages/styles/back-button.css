@@ -1,0 +1,39 @@
+/* frontend/src/styles/back-button.css */
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 16px;
+  border-radius: 12px;
+
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+
+  color: #334155;
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: all 0.18s ease;
+
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+.back-button__icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.back-button:hover {
+  background: #f8fafc;
+  border-color: #cbd5f5;
+  color: #0f172a;
+  transform: translateY(-1px);
+}
+
+.back-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
