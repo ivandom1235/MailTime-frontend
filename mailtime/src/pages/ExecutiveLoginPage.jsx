@@ -57,8 +57,8 @@ function ExecutiveLoginPage() {
       <div className="app-page__background"></div>
       <div className="app-card app-card--narrow">
         <div className="app-card__header">
-          <p className="app-card__eyebrow">Executive Access</p>
-          <h2>Executive Login</h2>
+          <p className="app-card__eyebrow">WMS Executive Access</p>
+          <h2>WMS Executive Login</h2>
           <p className="app-card__subtitle">{tenant?.name}</p>
         </div>
 

@@ -8,6 +8,7 @@ function formatStatusLabel(status) {
   const labels = {
     pending_signature: "Pending Signature",
     received: "Received at Mail Room",
+    "Received at Mail Room": "Received at Mail Room",
     collected: "Collected",
     not_collected: "Not Collected",
     collected_by_proxy: "Collected by proxy",
@@ -31,9 +32,8 @@ function OutgoingMailPage() {
     trackingNumber: "",
     collectedBy: "",
     proxyPhoneNumber: "",
-    collectedAt: "",
     remarks: "",
-    finalStatus: "received",
+    finalStatus: "Received at Mail Room",
   });
 
   const [loading, setLoading] = useState(false);
@@ -97,7 +97,6 @@ function OutgoingMailPage() {
     try {
       const payload = {
         ...form,
-        collectedAt: form.collectedAt.replace("T", " "),
       };
 
       const res = await api.post("/outgoing-mails", payload);
@@ -161,7 +160,7 @@ function OutgoingMailPage() {
       <div className="app-card app-card--wide">
         <div className="app-card__header">
           <p className="app-card__eyebrow">Executive Workspace</p>
-          <h1>Outbound Mail</h1>
+          <h1>Employee Mail Delivery</h1>
           <p className="app-card__subtitle">Create an outbound draft from an inbound tracking number and monitor signature status.</p>
         </div>
 
@@ -200,7 +199,7 @@ function OutgoingMailPage() {
                 onChange={handleChange}
                 required
               >
-                <option value="received">Received at Mail Room</option>
+                <option value="Received at Mail Room">Received at Mail Room</option>
                 <option value="collected">Collected</option>
                 <option value="not_collected">Not Collected</option>
                 <option value="collected_by_proxy">Collected by proxy</option>
@@ -228,18 +227,6 @@ function OutgoingMailPage() {
                 name="collectedBy"
                 placeholder="Collected By"
                 value={form.collectedBy}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className="app-form__group">
-              <label htmlFor="collected-at">Collected At</label>
-              <input
-                id="collected-at"
-                type="datetime-local"
-                name="collectedAt"
-                value={form.collectedAt}
                 onChange={handleChange}
                 required
               />

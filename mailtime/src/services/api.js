@@ -1,5 +1,10 @@
 // frontend/src/services/api.js
-export const API_BASE_URL = "https://mailtime-1klh.onrender.com";
+const DEFAULT_API_BASE_URL = import.meta.env.DEV
+  ? "http://localhost:5000"
+  : "https://mailtime-1klh.onrender.com";
+
+export const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL;
 export const BASE_URL = `${API_BASE_URL}/api`;
 
 function getHeaders() {
@@ -24,14 +29,21 @@ async function request(path, options = {}) {
   });
 
   let data = {};
+  let responseText = "";
   try {
-    data = await res.json();
+    responseText = await res.text();
+    data = responseText ? JSON.parse(responseText) : {};
   } catch (error) {
     data = {};
   }
 
   if (!res.ok) {
-    throw new Error(data.message || "Request failed");
+    const fallbackMessage = responseText
+      ? responseText.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
+      : "";
+    const message = data.message || fallbackMessage || `Request failed with status ${res.status}`;
+
+    throw new Error(message);
   }
 
   return data;

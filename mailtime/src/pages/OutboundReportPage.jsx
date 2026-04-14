@@ -21,6 +21,7 @@ const CSV_COLUMNS = [
   "Receiver Phone No",
   "Receiver Address",
   "Receiver Pincode",
+  "Remarks",
   "Created At",
 ];
 
@@ -73,6 +74,7 @@ function toReportExportRow(row) {
     "Receiver Phone No": row.receiver_phone_no,
     "Receiver Address": row.receiver_address,
     "Receiver Pincode": row.receiver_pincode,
+    Remarks: row.remarks,
     "Created At": formatDateTime(row.created_at),
   };
 }
@@ -443,6 +445,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
               <th>Receiver Phone</th>
               <th>Receiver Address</th>
               <th>Receiver Pincode</th>
+              <th>Remarks</th>
               <th>Created At</th>
             </tr>
           </thead>
@@ -450,7 +453,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
           <tbody>
             {rows.length === 0 ? (
               <tr>
-                <td colSpan="20" style={{ textAlign: "center" }}>
+                <td colSpan="21" style={{ textAlign: "center" }}>
                   No outbound mail records found
                 </td>
               </tr>
@@ -476,6 +479,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
                   <td>{row.receiver_phone_no}</td>
                   <td>{row.receiver_address}</td>
                   <td>{row.receiver_pincode}</td>
+                  <td>{row.remarks}</td>
                   <td>{formatDateTime(row.created_at)}</td>
                 </tr>
               ))

@@ -41,14 +41,17 @@ function AdminDashboardPage() {
       <div className="app-card app-card--dashboard">
         <div className="app-toolbar">
           <div className="app-toolbar__content">
-            <p className="app-card__eyebrow">Admin Workspace</p>
-            <h2>Admin Dashboard</h2>
+            <p className="app-card__eyebrow">WMS Admin Workspace</p>
+            <h2>WMS Admin Dashboard</h2>
             <p className="app-card__subtitle">Welcome, {user?.name}</p>
           </div>
 
           <div className="app-actions">
             <button className="app-button app-button--secondary" onClick={() => navigate("/admin/outbound-mails")}>
               View Outbound Mail
+            </button>
+            <button className="app-button app-button--secondary" onClick={() => navigate("/admin/inbound-report")}>
+              View Inbound Report
             </button>
             <button className="app-button app-button--secondary" onClick={() => navigate("/admin/outbound-report")}>
               View Outbound Reports

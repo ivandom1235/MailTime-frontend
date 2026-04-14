@@ -19,8 +19,8 @@ export default function ExecutiveDashboard() {
       <div className="app-card app-card--dashboard">
         <div className="app-toolbar">
           <div className="app-toolbar__content">
-            <p className="app-card__eyebrow">Executive Workspace</p>
-            <h2>Executive Dashboard</h2>
+            <p className="app-card__eyebrow">WMS Executive Workspace</p>
+            <h2>WMS Executive Dashboard</h2>
             <p className="app-card__subtitle">
               Welcome{user?.name ? `, ${user.name}` : ""}. Choose whether you want to
               register inbound mail or create a new outbound dispatch.
@@ -54,6 +54,15 @@ export default function ExecutiveDashboard() {
           <button
             type="button"
             className="app-action-card"
+            onClick={() => navigate("/executive/inbound-report")}
+          >
+            <h3>Inbound Mail Report</h3>
+            <p>Review inbound records raised from your assigned company and location.</p>
+          </button>
+
+          <button
+            type="button"
+            className="app-action-card"
             onClick={() => navigate("/executive/outbound-mail")}
           >
             <h3>Outbound Mail Dispatch</h3>
@@ -66,6 +75,14 @@ export default function ExecutiveDashboard() {
           >
             <h3>Outbound Report</h3>
             <p>Review outbound records raised from your assigned company and location.</p>
+          </button>
+          <button
+            type="button"
+            className="app-action-card"
+            onClick={() => navigate("/executive/edit-outbound")}
+          >
+            <h3>Edit Outbound</h3>
+            <p>Update courier vendor and remarks for outbound mail you created.</p>
           </button>
         </div>
 

@@ -57,8 +57,8 @@ function AdminLoginPage() {
       <div className="app-page__background"></div>
       <div className="app-card app-card--narrow">
         <div className="app-card__header">
-          <p className="app-card__eyebrow">Admin Access</p>
-          <h2>Admin Login</h2>
+          <p className="app-card__eyebrow">WMS Admin Access</p>
+          <h2>WMS Admin Login</h2>
           <p className="app-card__subtitle">{tenant?.name}</p>
         </div>
 

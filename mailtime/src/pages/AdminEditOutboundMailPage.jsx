@@ -22,6 +22,7 @@ const emptyForm = {
   receiverPhone: "",
   receiverAddress: "",
   receiverPincode: "",
+  remarks: "",
 };
 
 function getFormFromOutboundMail(outboundMail) {
@@ -44,6 +45,7 @@ function getFormFromOutboundMail(outboundMail) {
     receiverPhone: outboundMail.receiverPhone || "",
     receiverAddress: outboundMail.receiverAddress || "",
     receiverPincode: outboundMail.receiverPincode || "",
+    remarks: outboundMail.remarks || "",
   };
 }
 
@@ -216,6 +218,11 @@ export default function AdminEditOutboundMailPage() {
             <div className="app-form__group">
               <label htmlFor="receiverPincode">Receiver Pincode</label>
               <input id="receiverPincode" name="receiverPincode" value={form.receiverPincode} onChange={handleChange} />
+            </div>
+
+            <div className="app-form__group app-form__group--full">
+              <label htmlFor="remarks">Remarks</label>
+              <textarea id="remarks" name="remarks" value={form.remarks} onChange={handleChange} />
             </div>
 
             <div className="app-actions app-form__group--full">

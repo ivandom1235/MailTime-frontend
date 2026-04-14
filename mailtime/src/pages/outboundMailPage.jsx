@@ -19,6 +19,7 @@ const initialForm = {
   receiverPhone: "",
   receiverAddress: "",
   receiverPincode: "",
+  remarks: "",
 };
 
 function OutboundMailPage() {
@@ -94,6 +95,7 @@ function OutboundMailPage() {
           <input name="receiverPhone" placeholder="Phone Number" value={form.receiverPhone} onChange={handleChange} />
           <textarea name="receiverAddress" placeholder="Receiver Address" value={form.receiverAddress} onChange={handleChange} />
           <input name="receiverPincode" placeholder="Receiver Address Pin Code" value={form.receiverPincode} onChange={handleChange} />
+          <textarea name="remarks" placeholder="Remarks" value={form.remarks} onChange={handleChange} />
 
           <div className="app-actions">
             <button className="app-button app-button--primary" type="submit" disabled={loading}>
@@ -109,6 +111,7 @@ function OutboundMailPage() {
             <h3>Post Summary</h3>
             <p><strong>Tracking Number:</strong> {savedData.tracking_number}</p>
             <p><strong>Summary:</strong> {savedData.summary}</p>
+            <p><strong>Remarks:</strong> {savedData.remarks || "-"}</p>
             <p><strong>Timestamp:</strong> {savedData.created_at}</p>
             <p><strong>Total Cost:</strong> Rs. {savedData.total_cost}</p>
           </div>
