@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/BackButton";
+import Icon from "../components/Icon";
 import "./styles/role-select.css";
 
 function RoleSelectPage() {
@@ -47,7 +48,7 @@ function RoleSelectPage() {
               <h3>Admin</h3>
               <p>Manage users, roles, and system configuration</p>
             </div>
-            <span>&rarr;</span>
+            <Icon name="arrow" />
           </button>
 
           <button
@@ -58,7 +59,7 @@ function RoleSelectPage() {
               <h3>Executive</h3>
               <p>Handle operations, mail tracking, and workflows</p>
             </div>
-            <span>&rarr;</span>
+            <Icon name="arrow" />
           </button>
         </div>
 

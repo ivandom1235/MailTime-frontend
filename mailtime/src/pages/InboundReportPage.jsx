@@ -70,7 +70,7 @@ async function readJsonResponse(res, fallbackMessage) {
 
   try {
     data = text ? JSON.parse(text) : {};
-  } catch (error) {
+  } catch {
     const message = text
       ? text.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
       : fallbackMessage;
@@ -271,73 +271,70 @@ export default function InboundReportPage() {
   }
 
   return (
-    <div style={{ padding: "24px" }}>
-      <h2>Inbound Mail Report</h2>
+    <div className="app-report">
+      <header className="app-card__header">
+        <h1>Inbound Mail Report</h1>
+      </header>
 
       <form
         onSubmit={handleApplyFilters}
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, minmax(180px, 1fr))",
-          gap: "12px",
-          marginBottom: "20px",
-        }}
+        className="app-form app-report-filters"
       >
-        <input type="text" name="company" placeholder="Company" value={filters.company} onChange={handleChange} disabled title="Your company is fixed for this report" />
-        <input type="text" name="location" placeholder="Location" value={filters.location} onChange={handleChange} disabled title="Your location is fixed for this report" />
-        <input type="text" name="mailNumber" placeholder="Mail Number" value={filters.mailNumber} onChange={handleChange} />
-        <input type="text" name="trackingNumber" placeholder="Tracking Number" value={filters.trackingNumber} onChange={handleChange} />
-        <input type="text" name="recipientName" placeholder="Recipient Name" value={filters.recipientName} onChange={handleChange} />
-        <input type="text" name="recipientDepartment" placeholder="Recipient Department" value={filters.recipientDepartment} onChange={handleChange} />
-        <input type="text" name="documentTitle" placeholder="Document Title" value={filters.documentTitle} onChange={handleChange} />
+        <input aria-label="Company" type="text" name="company" placeholder="Company" value={filters.company} onChange={handleChange} disabled title="Your company is fixed for this report" />
+        <input aria-label="Location" type="text" name="location" placeholder="Location" value={filters.location} onChange={handleChange} disabled title="Your location is fixed for this report" />
+        <input aria-label="Mail Number" type="text" name="mailNumber" placeholder="Mail Number" value={filters.mailNumber} onChange={handleChange} />
+        <input aria-label="Tracking Number" type="text" name="trackingNumber" placeholder="Tracking Number" value={filters.trackingNumber} onChange={handleChange} />
+        <input aria-label="Recipient Name" type="text" name="recipientName" placeholder="Recipient Name" value={filters.recipientName} onChange={handleChange} />
+        <input aria-label="Recipient Department" type="text" name="recipientDepartment" placeholder="Recipient Department" value={filters.recipientDepartment} onChange={handleChange} />
+        <input aria-label="Document Title" type="text" name="documentTitle" placeholder="Document Title" value={filters.documentTitle} onChange={handleChange} />
 
-        <select name="documentType" value={filters.documentType} onChange={handleChange}>
+        <select aria-label="Document Type" name="documentType" value={filters.documentType} onChange={handleChange}>
           <option value="">All Document Types</option>
           {filterOptions.documentTypes.map((item) => (
             <option key={item} value={item}>{item}</option>
           ))}
         </select>
 
-        <input type="text" name="collectedBy" placeholder="Collected By" value={filters.collectedBy} onChange={handleChange} />
-        <input type="text" name="proxyPhoneNumber" placeholder="Proxy Phone Number" value={filters.proxyPhoneNumber} onChange={handleChange} />
+        <input aria-label="Collected By" type="text" name="collectedBy" placeholder="Collected By" value={filters.collectedBy} onChange={handleChange} />
+        <input aria-label="Proxy Phone Number" type="text" name="proxyPhoneNumber" placeholder="Proxy Phone Number" value={filters.proxyPhoneNumber} onChange={handleChange} />
 
-        <select name="finalStatus" value={filters.finalStatus} onChange={handleChange}>
+        <select aria-label="Final Status" name="finalStatus" value={filters.finalStatus} onChange={handleChange}>
           <option value="">All Final Statuses</option>
           {filterOptions.finalStatuses.map((item) => (
             <option key={item} value={item}>{item}</option>
           ))}
         </select>
 
-        <select name="status" value={filters.status} onChange={handleChange}>
+        <select aria-label="Status" name="status" value={filters.status} onChange={handleChange}>
           <option value="">All Statuses</option>
           {filterOptions.statuses.map((item) => (
             <option key={item} value={item}>{item}</option>
           ))}
         </select>
 
-        <input type="date" name="collectedDateFrom" value={filters.collectedDateFrom} onChange={handleChange} title="Collected from" />
-        <input type="date" name="collectedDateTo" value={filters.collectedDateTo} onChange={handleChange} title="Collected to" />
-        <input type="date" name="dateFrom" value={filters.dateFrom} onChange={handleChange} title="Created from" />
-        <input type="date" name="dateTo" value={filters.dateTo} onChange={handleChange} title="Created to" />
+        <input aria-label="Collected Date From" type="date" name="collectedDateFrom" value={filters.collectedDateFrom} onChange={handleChange} title="Collected from" />
+        <input aria-label="Collected Date To" type="date" name="collectedDateTo" value={filters.collectedDateTo} onChange={handleChange} title="Collected to" />
+        <input aria-label="Date From" type="date" name="dateFrom" value={filters.dateFrom} onChange={handleChange} title="Created from" />
+        <input aria-label="Date To" type="date" name="dateTo" value={filters.dateTo} onChange={handleChange} title="Created to" />
 
-        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-          <button type="submit" disabled={loading}>
+        <div className="app-actions">
+          <button className="app-button app-button--primary" type="submit" disabled={loading}>
             {loading ? "Loading..." : "Apply Filters"}
           </button>
-          <button type="button" onClick={handleResetFilters}>Reset</button>
+          <button className="app-button app-button--secondary" type="button" onClick={handleResetFilters}>Reset</button>
         </div>
 
-        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-          <button type="button" onClick={handleDownloadAll}>Download All CSV</button>
-          <button type="button" onClick={handleDownloadFiltered}>Download Filtered CSV</button>
+        <div className="app-actions">
+          <button className="app-button app-button--secondary" type="button" onClick={handleDownloadAll}>Download All CSV</button>
+          <button className="app-button app-button--secondary" type="button" onClick={handleDownloadFiltered}>Download Filtered CSV</button>
         </div>
       </form>
 
-      {error ? <p style={{ color: "red" }}>{error}</p> : null}
-      {loading ? <p>Loading...</p> : null}
+      {error ? <p className="app-message app-message--error" role="alert">{error}</p> : null}
+      {loading ? <p className="app-message" role="status">Loading...</p> : null}
 
-      <div style={{ overflowX: "auto" }}>
-        <table border="1" cellPadding="8" cellSpacing="0" style={{ width: "100%", borderCollapse: "collapse" }}>
+      <div className="app-table-wrap" role="region" aria-label="Mail report results" tabIndex={0}>
+        <table className="app-table">
           <thead>
             <tr>
               <th>ID</th>
@@ -363,7 +360,7 @@ export default function InboundReportPage() {
           <tbody>
             {rows.length === 0 ? (
               <tr>
-                <td colSpan="18" style={{ textAlign: "center" }}>No inbound mail delivery records found</td>
+                <td colSpan="18" className="app-table__empty"><span>No inbound mail delivery records found</span></td>
               </tr>
             ) : (
               rows.map((row) => (
@@ -391,11 +388,10 @@ export default function InboundReportPage() {
             )}
           </tbody>
         </table>
-
-        <div className="app-actions app-actions--center">
+      </div>
+      <div className="app-actions app-actions--center">
           <BackButton fallbackPath="/executive" />
         </div>
-      </div>
     </div>
   );
 }

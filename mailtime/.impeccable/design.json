@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-20T18:19:14Z",
+  "title": "Design System: WMS Workspace",
+  "extensions": {
+    "shadows": [
+      {"name": "card", "value": "0 2px 4px rgb(15 23 42 / 3%)", "purpose": "Shared white surfaces."},
+      {"name": "primary-action", "value": "0 4px 10px rgb(194 65 12 / 16%)", "purpose": "Primary buttons."},
+      {"name": "brand-mark", "value": "0 3px 8px rgb(249 115 22 / 18%)", "purpose": "Workspace brand mark."},
+      {"name": "mobile-navigation", "value": "0 -4px 12px rgb(15 23 42 / 3%)", "purpose": "Fixed bottom navigation."},
+      {"name": "field-focus", "value": "0 0 0 3px rgb(249 115 22 / 16%)", "purpose": "Focused fields, paired with primary border."}
+    ],
+    "motion": [
+      {"name": "state-transition", "value": ".16s ease", "purpose": "Color, background, border, and shadow changes."},
+      {"name": "reduced-motion", "value": "transition: none; animation: none; scroll-behavior: auto", "purpose": "Applied under prefers-reduced-motion: reduce."}
+    ],
+    "breakpoints": [
+      {"name": "stacked-dashboard", "value": "900px"},
+      {"name": "mobile-navigation", "value": "600px"},
+      {"name": "single-column-report-filters", "value": "380px"}
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button", "kind": "button", "refersTo": "button-primary",
+      "description": "Main form submission and Add Executive action.",
+      "html": "<button class=\"ds-primary\" type=\"button\">Add Executive</button>",
+      "css": ".ds-primary{min-height:46px;padding:11px 16px;border:1px solid transparent;border-radius:var(--radius-control);font-family:inherit;font-size:14px;font-weight:650;line-height:1.4;color:var(--color-surface);background:linear-gradient(100deg,#cc4b0a,var(--color-primary));box-shadow:0 4px 10px rgb(194 65 12 / 16%);cursor:pointer;transition:background .16s ease,box-shadow .16s ease}.ds-primary:hover:not(:disabled){background:var(--color-primary-hover)}.ds-primary:focus-visible{outline:3px solid var(--color-primary);outline-offset:3px}.ds-primary:disabled{opacity:.6;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "Secondary Button", "kind": "button", "refersTo": "button-secondary",
+      "description": "Supporting form and report actions.",
+      "html": "<button class=\"ds-secondary\" type=\"button\">Back</button>",
+      "css": ".ds-secondary{min-height:46px;padding:11px 16px;border:1px solid var(--color-border);border-radius:var(--radius-control);font-family:inherit;font-size:14px;font-weight:650;line-height:1.4;color:#334155;background:var(--color-surface);cursor:pointer;transition:background .16s ease,border-color .16s ease}.ds-secondary:hover:not(:disabled){color:var(--color-primary);border-color:var(--color-brand-border);background:var(--color-brand-soft)}.ds-secondary:focus-visible{outline:3px solid var(--color-primary);outline-offset:3px}.ds-secondary:disabled{opacity:.6;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "name": "Danger Button", "kind": "button", "refersTo": "button-danger",
+      "description": "Destructive actions.",
+      "html": "<button class=\"ds-danger\" type=\"button\">Delete</button>",
+      "css": ".ds-danger{min-height:46px;padding:11px 16px;border:1px solid transparent;border-radius:var(--radius-control);font-family:inherit;font-size:14px;font-weight:650;line-height:1.4;color:var(--color-surface);background:#be123c;cursor:pointer;transition:background .16s ease}.ds-danger:hover:not(:disabled){background:#9f1239}.ds-danger:focus-visible{outline:3px solid var(--color-primary);outline-offset:3px}.ds-danger:disabled{opacity:.6;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-danger{transition:none}}"
+    },
+    {
+      "name": "Quiet Danger Button", "kind": "button", "refersTo": "button-quiet-danger",
+      "description": "Subdued logout action.",
+      "html": "<button class=\"ds-quiet-danger\" type=\"button\">Log out</button>",
+      "css": ".ds-quiet-danger{min-height:44px;padding:8px 10px;border:1px solid transparent;border-radius:var(--radius-control);font-family:inherit;font-size:12px;font-weight:650;line-height:1.4;color:#be123c;background:transparent;cursor:pointer;transition:background .16s ease,border-color .16s ease}.ds-quiet-danger:hover{background:#fff1f2;border-color:#fecdd3}.ds-quiet-danger:focus-visible{outline:3px solid var(--color-primary);outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-quiet-danger{transition:none}}"
+    },
+    {
+      "name": "Text Field", "kind": "input", "refersTo": "input",
+      "description": "Labeled form input with orange focus ring.",
+      "html": "<label class=\"ds-field\">Email<input class=\"ds-input\" type=\"email\" placeholder=\"Email address\"></label>",
+      "css": ".ds-field{display:grid;gap:7px;color:#334155;font-size:13px;font-weight:600;line-height:1.4}.ds-input{min-width:0;min-height:46px;padding:11px 13px;border:1px solid var(--color-border);border-radius:var(--radius-control);background:var(--color-surface);color:var(--color-ink);font-family:inherit;font-size:14px;line-height:1.5;transition:border-color .16s ease,box-shadow .16s ease}.ds-input::placeholder{color:var(--color-muted);opacity:1}.ds-input:focus{outline:none;border-color:var(--color-primary);box-shadow:0 0 0 3px rgb(249 115 22 / 16%)}.ds-input:disabled{background:#f1f5f9;color:#475569;cursor:not-allowed}@media(max-width:600px){.ds-input{font-size:16px}}@media(prefers-reduced-motion:reduce){.ds-input{transition:none}}"
+    },
+    {
+      "name": "Active Navigation Link", "kind": "nav", "refersTo": "navigation-active",
+      "description": "Role-aware navigation; mobile shell provides fixed bottom positioning and five columns.",
+      "html": "<nav aria-label=\"Workspace navigation\"><a class=\"ds-nav\" href=\"#\" aria-current=\"page\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z\"/></svg><span>Home</span></a></nav>",
+      "css": ".ds-nav{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 18px;border-radius:10px;color:var(--color-primary);background:var(--color-brand-soft);text-decoration:none;font-size:13px;font-weight:600;transition:color .16s ease,background .16s ease}.ds-nav:focus-visible{outline:3px solid var(--color-primary);outline-offset:3px}@media(max-width:600px){.ds-nav{flex-direction:column;gap:4px;min-height:48px;padding:5px 2px;background:transparent;font-size:10px;line-height:1.2}.ds-nav svg{width:21px;height:21px}}@media(prefers-reduced-motion:reduce){.ds-nav{transition:none}}"
+    },
+    {
+      "name": "Access Badge", "kind": "chip", "refersTo": "badge",
+      "description": "Noninteractive access label.",
+      "html": "<span class=\"ds-badge\">Admin Access</span>",
+      "css": ".ds-badge{display:inline-flex;padding:4px 8px;border:1px solid var(--color-brand-border);border-radius:6px;color:var(--color-primary);background:var(--color-brand-soft);font-size:11px;font-weight:650}"
+    },
+    {
+      "name": "Card", "kind": "card", "refersTo": "card",
+      "description": "Shared white form surface.",
+      "html": "<section class=\"ds-card\"><h2>Mail management</h2><p>Workspace form surface</p></section>",
+      "css": ".ds-card{padding:28px;border:1px solid var(--color-border);border-radius:var(--radius-card);background:var(--color-surface);color:var(--color-ink);box-shadow:var(--shadow-card)}.ds-card h2{margin:0;font-size:clamp(22px,2.5vw,28px);line-height:1.25;letter-spacing:-.025em}.ds-card p{margin:8px 0 0;color:var(--color-muted);font-size:14px;line-height:1.6}@media(max-width:600px){.ds-card{padding:22px 18px}.ds-card h2{font-size:22px}}"
+    }
+  ],
+  "narrative": {
+    "overview": "Visual authority: [the supplied reference](../newDesing.txt). The implemented system uses native system sans typography, slate backgrounds and text, orange accents, and gently rounded white surfaces for mail management by administrators and executives. Source: `src/index.css`, `src/components/WorkspaceShell.jsx`, `src/pages/AdminDashboardPage.jsx`, and `src/pages/styles/*.css`.",
+    "keyCharacteristics": ["compact information hierarchy", "restrained shadows", "clear form controls", "navigation adapted to the current role and viewport"],
+    "dos": ["Do reuse the shared tokens, native system type, visible focus states, and responsive navigation clearances.", "Do derive dashboard counts and record fields from the application data."],
+    "donts": ["Don't copy fictional statuses, trends, queue metrics, or sample people from the reference.", "Don't replace the pinned orange/slate palette or introduce decorative imagery into these operational surfaces."]
+  }
+}

@@ -1,0 +1,376 @@
+{
+  "checks": [
+    {
+      "route": "/admin",
+      "width": 1440,
+      "scrollWidth": 1430,
+      "heading": "WMS Admin Dashboard",
+      "inputs": 1,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "WMS Executive Dashboard",
+      "inputs": 0,
+      "missingLabels": []
+    },
+    {
+      "route": "/login",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "Company Login",
+      "inputs": 1,
+      "missingLabels": []
+    },
+    {
+      "route": "/select-role",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "Select Role",
+      "inputs": 0,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/login",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "WMS Admin Login",
+      "inputs": 2,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive/login",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "WMS Executive Login",
+      "inputs": 2,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/add-executive",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "Add Executive",
+      "inputs": 7,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/password",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "Edit Password",
+      "inputs": 3,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive/incoming-mail",
+      "width": 1440,
+      "scrollWidth": 1430,
+      "heading": "Inbound EMS",
+      "inputs": 7,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive/outbound-mail",
+      "width": 1440,
+      "scrollWidth": 1430,
+      "heading": "Outbound Mail",
+      "inputs": 14,
+      "missingLabels": [
+        "senderName",
+        "senderEmail",
+        "senderContact",
+        "senderDepartment",
+        "senderPincode",
+        "packageType",
+        "weightKg",
+        "totalCost",
+        "courierVendor",
+        "destinationType",
+        "receiverName",
+        "receiverEmail",
+        "receiverPhone",
+        "receiverPincode"
+      ]
+    },
+    {
+      "route": "/outgoing-mail",
+      "width": 1440,
+      "scrollWidth": 1430,
+      "heading": "Employee Mail Delivery",
+      "inputs": 3,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/inbound-report",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "Inbound Mail Report",
+      "inputs": 11,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/outbound-report",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "Outbound Mail Reports",
+      "inputs": 10,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive/inbound-report",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "Inbound Mail Report",
+      "inputs": 16,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive/outbound-report",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "Outbound Mail Report",
+      "inputs": 10,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive/edit-outbound",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "Edit Outbound",
+      "inputs": 3,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/outbound-mails",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "Outbound Mail Details",
+      "inputs": 1,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/inbound-mails/demo",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "Edit Inbound Mail",
+      "inputs": 0,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/outbound-mails/demo",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "heading": "Edit Outbound Mail",
+      "inputs": 0,
+      "missingLabels": []
+    },
+    {
+      "route": "/sign/outgoing/demo",
+      "width": 1440,
+      "scrollWidth": 1430,
+      "heading": "Outbound Mail Signature",
+      "inputs": 1,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin",
+      "width": 390,
+      "scrollWidth": 380,
+      "heading": "WMS Admin Dashboard",
+      "inputs": 1,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive",
+      "width": 390,
+      "scrollWidth": 380,
+      "heading": "WMS Executive Dashboard",
+      "inputs": 0,
+      "missingLabels": []
+    },
+    {
+      "route": "/login",
+      "width": 390,
+      "scrollWidth": 390,
+      "heading": "Company Login",
+      "inputs": 1,
+      "missingLabels": []
+    },
+    {
+      "route": "/select-role",
+      "width": 390,
+      "scrollWidth": 390,
+      "heading": "Select Role",
+      "inputs": 0,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/login",
+      "width": 390,
+      "scrollWidth": 390,
+      "heading": "WMS Admin Login",
+      "inputs": 2,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive/login",
+      "width": 390,
+      "scrollWidth": 390,
+      "heading": "WMS Executive Login",
+      "inputs": 2,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/add-executive",
+      "width": 390,
+      "scrollWidth": 380,
+      "heading": "Add Executive",
+      "inputs": 7,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/password",
+      "width": 390,
+      "scrollWidth": 390,
+      "heading": "Edit Password",
+      "inputs": 3,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive/incoming-mail",
+      "width": 390,
+      "scrollWidth": 380,
+      "heading": "Inbound EMS",
+      "inputs": 7,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive/outbound-mail",
+      "width": 390,
+      "scrollWidth": 380,
+      "heading": "Outbound Mail",
+      "inputs": 14,
+      "missingLabels": [
+        "senderName",
+        "senderEmail",
+        "senderContact",
+        "senderDepartment",
+        "senderPincode",
+        "packageType",
+        "weightKg",
+        "totalCost",
+        "courierVendor",
+        "destinationType",
+        "receiverName",
+        "receiverEmail",
+        "receiverPhone",
+        "receiverPincode"
+      ]
+    },
+    {
+      "route": "/outgoing-mail",
+      "width": 390,
+      "scrollWidth": 380,
+      "heading": "Employee Mail Delivery",
+      "inputs": 3,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/inbound-report",
+      "width": 390,
+      "scrollWidth": 380,
+      "heading": "Inbound Mail Report",
+      "inputs": 11,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/outbound-report",
+      "width": 390,
+      "scrollWidth": 390,
+      "heading": "Outbound Mail Reports",
+      "inputs": 10,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive/inbound-report",
+      "width": 390,
+      "scrollWidth": 380,
+      "heading": "Inbound Mail Report",
+      "inputs": 16,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive/outbound-report",
+      "width": 390,
+      "scrollWidth": 390,
+      "heading": "Outbound Mail Report",
+      "inputs": 10,
+      "missingLabels": []
+    },
+    {
+      "route": "/executive/edit-outbound",
+      "width": 390,
+      "scrollWidth": 390,
+      "heading": "Edit Outbound",
+      "inputs": 3,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/outbound-mails",
+      "width": 390,
+      "scrollWidth": 390,
+      "heading": "Outbound Mail Details",
+      "inputs": 1,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/inbound-mails/demo",
+      "width": 390,
+      "scrollWidth": 390,
+      "heading": "Edit Inbound Mail",
+      "inputs": 0,
+      "missingLabels": []
+    },
+    {
+      "route": "/admin/outbound-mails/demo",
+      "width": 390,
+      "scrollWidth": 390,
+      "heading": "Edit Outbound Mail",
+      "inputs": 0,
+      "missingLabels": []
+    },
+    {
+      "route": "/sign/outgoing/demo",
+      "width": 390,
+      "scrollWidth": 380,
+      "heading": "Outbound Mail Signature",
+      "inputs": 1,
+      "missingLabels": []
+    },
+    {
+      "search": "entered"
+    },
+    {
+      "searchMatches": [
+        "Priya Shah"
+      ]
+    },
+    {
+      "searchEmpty": "No executives match your search."
+    },
+    {
+      "searchResetCount": 3
+    },
+    {
+      "settingsRoute": "/admin/password",
+      "passwordHeading": "Edit Password"
+    },
+    {
+      "errorVisible": "Could not load executives. Please try again."
+    }
+  ],
+  "errors": []
+}

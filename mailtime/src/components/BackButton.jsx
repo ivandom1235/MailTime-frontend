@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Icon from "./Icon";
 import "../pages/styles/back-button.css";
 
 function BackButton({ fallbackPath = "/login" }) {
@@ -19,7 +20,7 @@ function BackButton({ fallbackPath = "/login" }) {
       onClick={handleBack}
       className="back-button"
     >
-      <span className="back-button__icon">&larr;</span>
+      <Icon name="back" />
       Back
     </button>
   );

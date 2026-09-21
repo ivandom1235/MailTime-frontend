@@ -17,9 +17,12 @@ import AdminEditInboundMailPage from "./pages/AdminEditInboundMailPage";
 import AdminOutboundMailsPage from "./pages/AdminOutboundMailsPage";
 import AdminEditOutboundMailPage from "./pages/AdminEditOutboundMailPage";
 import ExecutiveEditOutboundPage from "./pages/ExecutiveEditOutboundPage";
+import AdminPasswordPage from "./pages/AdminPasswordPage";
+import WorkspaceShell from "./components/WorkspaceShell";
 
 function App() {
   return (
+    <WorkspaceShell>
     <Routes>
       <Route path="/" element={<LoginPage />} />
       <Route path="/login" element={<LoginPage />} />
@@ -27,6 +30,7 @@ function App() {
       <Route path="/select-role" element={<RoleSelectPage />} />
       <Route path="/admin/login" element={<AdminLoginPage />} />
       <Route path="/admin" element={<AdminDashboardPage />} />
+      <Route path="/admin/password" element={<AdminPasswordPage />} />
       <Route path="/admin/add-executive" element={<AddExecutivePage />} />
       <Route path="/admin/executives/new" element={<AddExecutivePage />} />
       <Route path="/admin/inbound-report" element={<AdminInboundReportPage />} />
@@ -49,6 +53,7 @@ function App() {
       />
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
+    </WorkspaceShell>
   );
 }
 

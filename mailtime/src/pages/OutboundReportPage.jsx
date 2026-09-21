@@ -267,19 +267,16 @@ export default function OutboundReportPage({ mode = "executive" }) {
   }
 
   return (
-    <div style={{ padding: "24px" }}>
-      <h2>{isAdmin ? "Outbound Mail Reports" : "Outbound Mail Report"}</h2>
+    <div className="app-report">
+      <header className="app-card__header">
+        <h1>{isAdmin ? "Outbound Mail Reports" : "Outbound Mail Report"}</h1>
+      </header>
 
       <form
         onSubmit={handleApplyFilters}
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, minmax(180px, 1fr))",
-          gap: "12px",
-          marginBottom: "20px",
-        }}
+        className="app-form app-report-filters"
       >
-        <input
+        <input aria-label="Company"
           type="text"
           name="company"
           placeholder={isAdmin ? "All Companies" : "Company"}
@@ -297,7 +294,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
           </datalist>
         ) : null}
 
-        <input
+        <input aria-label="Location"
           type="text"
           name="location"
           placeholder={isAdmin ? "All Locations" : "Location"}
@@ -315,7 +312,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
           </datalist>
         ) : null}
 
-        <input
+        <input aria-label="Sender Name"
           type="text"
           name="senderName"
           placeholder="Sender Name"
@@ -323,7 +320,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
           onChange={handleChange}
         />
 
-        <select
+        <select aria-label="Department"
           name="department"
           value={filters.department}
           onChange={handleChange}
@@ -336,7 +333,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
           ))}
         </select>
 
-        <select
+        <select aria-label="Package Type"
           name="packageType"
           value={filters.packageType}
           onChange={handleChange}
@@ -349,7 +346,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
           ))}
         </select>
 
-        <select
+        <select aria-label="Courier Vendor"
           name="courierVendor"
           value={filters.courierVendor}
           onChange={handleChange}
@@ -362,7 +359,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
           ))}
         </select>
 
-        <select
+        <select aria-label="Destination"
           name="destination"
           value={filters.destination}
           onChange={handleChange}
@@ -375,7 +372,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
           ))}
         </select>
 
-        <input
+        <input aria-label="Receiver Name"
           type="text"
           name="receiverName"
           placeholder="Receiver Name"
@@ -383,47 +380,42 @@ export default function OutboundReportPage({ mode = "executive" }) {
           onChange={handleChange}
         />
 
-        <input
+        <input aria-label="Date From"
           type="date"
           name="dateFrom"
           value={filters.dateFrom}
           onChange={handleChange}
         />
 
-        <input
+        <input aria-label="Date To"
           type="date"
           name="dateTo"
           value={filters.dateTo}
           onChange={handleChange}
         />
 
-        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-          <button type="submit">Apply Filters</button>
-          <button type="button" onClick={handleResetFilters}>
+        <div className="app-actions">
+          <button className="app-button app-button--primary" type="submit">Apply Filters</button>
+          <button className="app-button app-button--secondary" type="button" onClick={handleResetFilters}>
             Reset
           </button>
         </div>
 
-        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-          <button type="button" onClick={handleDownloadAllExcel}>
+        <div className="app-actions">
+          <button className="app-button app-button--secondary" type="button" onClick={handleDownloadAllExcel}>
             Download All CSV
           </button>
-          <button type="button" onClick={handleDownloadFilteredExcel}>
+          <button className="app-button app-button--secondary" type="button" onClick={handleDownloadFilteredExcel}>
             Download Filtered CSV
           </button>
         </div>
       </form>
 
-      {error ? <p style={{ color: "red" }}>{error}</p> : null}
-      {loading ? <p>Loading...</p> : null}
+      {error ? <p className="app-message app-message--error" role="alert">{error}</p> : null}
+      {loading ? <p className="app-message" role="status">Loading...</p> : null}
 
-      <div style={{ overflowX: "auto" }}>
-        <table
-          border="1"
-          cellPadding="8"
-          cellSpacing="0"
-          style={{ width: "100%", borderCollapse: "collapse" }}
-        >
+      <div className="app-table-wrap" role="region" aria-label="Mail report results" tabIndex={0}>
+        <table className="app-table">
           <thead>
             <tr>
               <th>ID</th>
@@ -453,9 +445,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
           <tbody>
             {rows.length === 0 ? (
               <tr>
-                <td colSpan="21" style={{ textAlign: "center" }}>
-                  No outbound mail records found
-                </td>
+                <td colSpan="21" className="app-table__empty"><span>No outbound mail records found</span></td>
               </tr>
             ) : (
               rows.map((row) => (
@@ -486,10 +476,10 @@ export default function OutboundReportPage({ mode = "executive" }) {
             )}
           </tbody>
         </table>
-        <div className="app-actions app-actions--center">
-          <BackButton fallbackPath="/executive" />
-        </div>
       </div>
+      <div className="app-actions app-actions--center">
+          <BackButton fallbackPath={isAdmin ? "/admin" : "/executive"} />
+        </div>
     </div>
   );
 }
