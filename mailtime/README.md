@@ -3,7 +3,7 @@
 Set the backend origin in `.env` beside this file:
 
 ```env
-VITE_API_BASE_URL=https://mailtime-1klh.onrender.com
+VITE_API_BASE_URL=https://mailtime-sj1m.onrender.com
 ```
 
 Use the actual Render URL, without a trailing slash or `/api`. `src/services/api.js`

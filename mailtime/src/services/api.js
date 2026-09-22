@@ -2,7 +2,7 @@ import { getSessionToken, clearSession } from './session';
 // frontend/src/services/api.js
 const DEFAULT_API_BASE_URL = import.meta.env.DEV
   ? "http://localhost:5000"
-  : "https://mailtime-1klh.onrender.com";
+  : "https://mailtime-sj1m.onrender.com";
 
 export const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL;
