@@ -36,7 +36,7 @@ export default function IncomingMailPage() {
     try {
       const data = await api.post("/executive/incoming-mails", formData);
 
-      setSuccessData(data.mail);
+      setSuccessData(data);
 
       setFormData({
         recipientName: "",
@@ -174,13 +174,31 @@ export default function IncomingMailPage() {
         {error && <p className="app-message app-message--error">{error}</p>}
 
         {successData && (
-          <div className="app-panel app-panel--success">
-          <h3>Mail Sent Successfully</h3>
-          <p><strong>Tracking Number:</strong> {successData.trackingNumber}</p>
-          <p><strong>Employee Name:</strong> {successData.recipientName}</p>
-          <p><strong>Employee Contact Number:</strong> {successData.recipientPhone}</p>
-          <p><strong>Type:</strong> {successData.itemType}</p>
-          <p><strong>Status:</strong> {successData.status}</p>
+          <div className="app-panel" aria-live="polite">
+          <h3>Incoming mail saved</h3>
+          <p><strong>Tracking Number:</strong> {successData.mail.trackingNumber}</p>
+          <p><strong>Employee Name:</strong> {successData.mail.recipientName}</p>
+          <p><strong>Employee Contact Number:</strong> {successData.mail.recipientPhone}</p>
+          <p><strong>Type:</strong> {successData.mail.itemType}</p>
+          <p><strong>Status:</strong> {successData.mail.status}</p>
+          {successData.emailError ? (
+            <p className="app-message app-message--error" role="alert">
+              {successData.emailError} The incoming mail record is saved; do not submit it again.
+            </p>
+          ) : successData.emailSent === true ? (
+            <p className="app-message app-message--success" role="status">
+              Email notification submitted to the email provider. Delivery is not yet confirmed.
+            </p>
+          ) : !successData.mail.recipientEmail ? (
+            <p className="app-message" role="status">
+              No email notification was sent because no recipient email address was provided.
+            </p>
+          ) : (
+            <p className="app-message app-message--error" role="alert">
+              Email notification could not be confirmed. Ask an administrator to check the mail connection.
+              The incoming mail record is saved; do not submit it again.
+            </p>
+          )}
         </div>
         )}
 

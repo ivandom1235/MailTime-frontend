@@ -1,3 +1,4 @@
+import { getSessionToken } from '../services/session';
 // frontend/src/pages/ExecutiveLoginPage.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +7,7 @@ import BackButton from "../components/BackButton";
 
 function ExecutiveLoginPage() {
   const navigate = useNavigate();
-  const tenant = JSON.parse(localStorage.getItem("tenant") || "null");
+  const tenant = JSON.parse(sessionStorage.getItem("tenant") || "null");
 
   const [form, setForm] = useState({
     email: "",
@@ -16,9 +17,8 @@ function ExecutiveLoginPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const token =
-      localStorage.getItem("session_token") || localStorage.getItem("auth_token");
-    const activeRole = JSON.parse(localStorage.getItem("active_role") || "null");
+    const token = getSessionToken();
+    const activeRole = JSON.parse(sessionStorage.getItem("active_role") || "null");
 
     if (token && activeRole?.name === "executive") {
       navigate("/executive", { replace: true });
@@ -40,9 +40,9 @@ function ExecutiveLoginPage() {
         tenantSlug: tenant?.slug,
       });
 
-      localStorage.setItem("session_token", res.token);
-      localStorage.setItem("user", JSON.stringify(res.user));
-      localStorage.setItem("active_role", JSON.stringify(res.activeRole));
+      sessionStorage.setItem("session_token", res.token);
+      sessionStorage.setItem("user", JSON.stringify(res.user));
+      sessionStorage.setItem("active_role", JSON.stringify(res.activeRole));
 
       navigate("/executive", { replace: true });
     } catch (err) {

@@ -1,3 +1,4 @@
+import { clearSession } from '../services/session';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
@@ -38,7 +39,8 @@ export default function AdminPasswordPage() {
         newPassword: form.newPassword,
       });
       setForm(initialForm);
-      setSuccess("Password updated successfully.");
+      clearSession();
+      navigate('/login', { replace: true });
     } catch (err) {
       setError(err.message || "Failed to update password");
     } finally {
@@ -77,7 +79,7 @@ export default function AdminPasswordPage() {
               type="password"
               value={form.newPassword}
               onChange={handleChange}
-              minLength="8"
+              minLength="15" maxLength="72"
               required
             />
           </div>
@@ -90,7 +92,7 @@ export default function AdminPasswordPage() {
               type="password"
               value={form.confirmPassword}
               onChange={handleChange}
-              minLength="8"
+              minLength="15" maxLength="72"
               required
             />
           </div>

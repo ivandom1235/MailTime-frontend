@@ -1,6 +1,7 @@
+import { escapeCsvValue } from "../services/csv";
 import { useEffect, useMemo, useState } from "react";
 import BackButton from "../components/BackButton";
-import { BASE_URL } from "../services/api";
+import { BASE_URL, authFetch, getHeaders as getAuthHeaders } from "../services/api";
 const CSV_COLUMNS = [
   "ID",
   "Company",
@@ -24,15 +25,6 @@ const CSV_COLUMNS = [
   "Remarks",
   "Created At",
 ];
-
-function getAuthHeaders() {
-  const token =
-    localStorage.getItem("session_token") || localStorage.getItem("auth_token");
-  return {
-    "Content-Type": "application/json",
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-  };
-}
 
 function buildQuery(filters) {
   const params = new URLSearchParams();
@@ -77,15 +69,6 @@ function toReportExportRow(row) {
     Remarks: row.remarks,
     "Created At": formatDateTime(row.created_at),
   };
-}
-
-function escapeCsvValue(value) {
-  if (value === null || value === undefined) return "";
-
-  const text = String(value);
-  const safeText = /^[=+\-@\t\r]/.test(text) ? `'${text}` : text;
-
-  return `"${safeText.replaceAll('"', '""')}"`;
 }
 
 function downloadRowsAsCsv(rows, filename) {
@@ -142,7 +125,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
   async function fetchFilterOptions() {
     try {
       const query = isAdmin ? buildQuery({ company: filters.company, location: filters.location }) : "";
-      const res = await fetch(`${BASE_URL}${reportBasePath}/filters${query ? `?${query}` : ""}`, {
+      const res = await authFetch(`${BASE_URL}${reportBasePath}/filters${query ? `?${query}` : ""}`, {
         method: "GET",
         headers: getAuthHeaders(),
       });
@@ -171,7 +154,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
       setError("");
 
       const query = buildQuery(currentFilters);
-      const res = await fetch(`${BASE_URL}${reportBasePath}?${query}`, {
+      const res = await authFetch(`${BASE_URL}${reportBasePath}?${query}`, {
         method: "GET",
         headers: getAuthHeaders(),
       });
@@ -248,7 +231,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
 
   async function handleDownloadAllExcel() {
     try {
-      const res = await fetch(`${BASE_URL}${reportBasePath}`, {
+      const res = await authFetch(`${BASE_URL}${reportBasePath}`, {
         method: "GET",
         headers: getAuthHeaders(),
       });
@@ -271,6 +254,7 @@ export default function OutboundReportPage({ mode = "executive" }) {
       <header className="app-card__header">
         <h1>{isAdmin ? "Outbound Mail Reports" : "Outbound Mail Report"}</h1>
       </header>
+      <p>Reports and exports include up to 1,000 records. Narrow the filters for larger reports.</p>
 
       <form
         onSubmit={handleApplyFilters}

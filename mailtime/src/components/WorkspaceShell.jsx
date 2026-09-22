@@ -19,8 +19,8 @@ const executiveLinks = [
 
 export default function WorkspaceShell({ children }) {
   const { pathname, hash } = useLocation();
-  const tenant = JSON.parse(localStorage.getItem('tenant') || 'null');
-  const user = JSON.parse(localStorage.getItem('user') || 'null');
+  const tenant = JSON.parse(sessionStorage.getItem('tenant') || 'null');
+  const user = JSON.parse(sessionStorage.getItem('user') || 'null');
   const isAdmin = pathname.startsWith('/admin') && pathname !== '/admin/login';
   const isExecutive = (pathname.startsWith('/executive') && pathname !== '/executive/login') || ['/incoming-mail', '/outgoing-mail'].includes(pathname);
   const isWorkspace = isAdmin || isExecutive;

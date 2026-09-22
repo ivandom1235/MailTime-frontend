@@ -1,3 +1,4 @@
+import { getSessionToken, clearSession } from './session';
 // frontend/src/services/api.js
 const DEFAULT_API_BASE_URL = import.meta.env.DEV
   ? "http://localhost:5000"
@@ -7,9 +8,8 @@ export const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL;
 export const BASE_URL = `${API_BASE_URL}/api`;
 
-function getHeaders() {
-  const token =
-    localStorage.getItem("session_token") || localStorage.getItem("auth_token");
+export function getHeaders() {
+  const token = getSessionToken();
 
   return {
     "Content-Type": "application/json",
@@ -17,10 +17,25 @@ function getHeaders() {
   };
 }
 
+export async function authFetch(url, options = {}) {
+  if (new URL(url).origin !== new URL(API_BASE_URL).origin) throw new Error('Untrusted API origin');
+  const response = await fetch(url, { ...options, signal: options.signal || AbortSignal.timeout(20000),
+    headers: { ...getHeaders(), ...options.headers } });
+  if (response.status === 401 && getSessionToken()) {
+    clearSession();
+    window.location.assign('/login');
+  }
+  return response;
+}
+export async function logout() {
+  if (getSessionToken()) await request('/auth/logout', { method: 'POST', body: '{}' });
+  clearSession();
+}
+
 async function request(path, options = {}) {
   const { headers = {}, ...restOptions } = options;
 
-  const res = await fetch(`${BASE_URL}${path}`, {
+  const res = await authFetch(`${BASE_URL}${path}`, {
     ...restOptions,
     headers: {
       ...getHeaders(),
@@ -33,7 +48,7 @@ async function request(path, options = {}) {
   try {
     responseText = await res.text();
     data = responseText ? JSON.parse(responseText) : {};
-  } catch (error) {
+  } catch {
     data = {};
   }
 

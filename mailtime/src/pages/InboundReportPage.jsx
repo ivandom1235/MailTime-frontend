@@ -1,6 +1,7 @@
+import { escapeCsvValue } from "../services/csv";
 import { useEffect, useMemo, useState } from "react";
 import BackButton from "../components/BackButton";
-import { BASE_URL } from "../services/api";
+import { BASE_URL, authFetch, getHeaders as getAuthHeaders } from "../services/api";
 
 const CSV_COLUMNS = [
   "ID",
@@ -16,8 +17,6 @@ const CSV_COLUMNS = [
   "Remarks",
   "Final Status",
   "Status",
-  "Sign Token",
-  "Sign Token Expires At",
   "Signature Required",
   "Created At",
   "Updated At",
@@ -41,16 +40,6 @@ const initialFilters = {
   dateFrom: "",
   dateTo: "",
 };
-
-function getAuthHeaders() {
-  const token =
-    localStorage.getItem("session_token") || localStorage.getItem("auth_token");
-
-  return {
-    "Content-Type": "application/json",
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-  };
-}
 
 function buildQuery(filters) {
   const params = new URLSearchParams();
@@ -86,7 +75,7 @@ async function readJsonResponse(res, fallbackMessage) {
 }
 
 async function fetchReportJson(path, fallbackMessage) {
-  const res = await fetch(`${BASE_URL}${path}`, {
+  const res = await authFetch(`${BASE_URL}${path}`, {
     method: "GET",
     headers: getAuthHeaders(),
   });
@@ -105,15 +94,6 @@ function formatBoolean(value) {
   if (value === true || value === 1) return "Yes";
   if (value === false || value === 0) return "No";
   return "";
-}
-
-function escapeCsvValue(value) {
-  if (value === null || value === undefined) return "";
-
-  const text = String(value);
-  const safeText = /^[=+\-@\t\r]/.test(text) ? `'${text}` : text;
-
-  return `"${safeText.replaceAll('"', '""')}"`;
 }
 
 function downloadRowsAsCsv(rows, filename) {
@@ -149,8 +129,6 @@ function toExportRow(row) {
     Remarks: row.remarks,
     "Final Status": row.final_status,
     Status: row.status,
-    "Sign Token": row.sign_token,
-    "Sign Token Expires At": formatDateTime(row.sign_token_expires_at),
     "Signature Required": formatBoolean(row.signature_required),
     "Created At": formatDateTime(row.created_at),
     "Updated At": formatDateTime(row.updated_at),
@@ -275,6 +253,7 @@ export default function InboundReportPage() {
       <header className="app-card__header">
         <h1>Inbound Mail Report</h1>
       </header>
+      <p>Reports and exports include up to 1,000 records. Narrow the filters for larger reports.</p>
 
       <form
         onSubmit={handleApplyFilters}
@@ -350,8 +329,6 @@ export default function InboundReportPage() {
               <th>Remarks</th>
               <th>Final Status</th>
               <th>Status</th>
-              <th>Sign Token</th>
-              <th>Sign Token Expires At</th>
               <th>Signature Required</th>
               <th>Created At</th>
               <th>Updated At</th>
@@ -360,7 +337,7 @@ export default function InboundReportPage() {
           <tbody>
             {rows.length === 0 ? (
               <tr>
-                <td colSpan="18" className="app-table__empty"><span>No inbound mail delivery records found</span></td>
+                <td colSpan="16" className="app-table__empty"><span>No inbound mail delivery records found</span></td>
               </tr>
             ) : (
               rows.map((row) => (
@@ -378,8 +355,6 @@ export default function InboundReportPage() {
                   <td>{row.remarks}</td>
                   <td>{row.final_status}</td>
                   <td>{row.status}</td>
-                  <td>{row.sign_token}</td>
-                  <td>{formatDateTime(row.sign_token_expires_at)}</td>
                   <td>{formatBoolean(row.signature_required)}</td>
                   <td>{formatDateTime(row.created_at)}</td>
                   <td>{formatDateTime(row.updated_at)}</td>

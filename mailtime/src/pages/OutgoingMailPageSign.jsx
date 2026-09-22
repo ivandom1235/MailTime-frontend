@@ -1,14 +1,14 @@
 // frontend/mailtime/src/pages/OutgoingMailSignPage.jsx
 import { useEffect, useRef, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import SignatureCanvas from "react-signature-canvas";
 import api from "../services/api";
 import BackButton from "../components/BackButton";
 
 function OutgoingMailSignPage() {
   const { draftId } = useParams();
-  const [searchParams] = useSearchParams();
-  const token = searchParams.get("token");
+  const [token] = useState(() => new URLSearchParams(window.location.hash.slice(1)).get('token'));
+  useEffect(() => { window.history.replaceState(null, '', window.location.pathname); }, []);
 
   const sigRef = useRef(null);
 
@@ -23,7 +23,7 @@ function OutgoingMailSignPage() {
     async function fetchDraft() {
       try {
         const res = await api.get(
-          `/outgoing-mails/${draftId}/sign-details?token=${token}`
+          `/outgoing-mails/${encodeURIComponent(draftId)}/sign-details`, { headers: { 'X-Signing-Token': token || '' } }
         );
         setDraft(res);
         setSignerName(res.collectedBy || "");
@@ -109,7 +109,8 @@ function OutgoingMailSignPage() {
             <label htmlFor="signer-name">Signer Name</label>
             <input
               id="signer-name"
-              type="text"
+              maxLength={150}
+      type="text"
               value={signerName}
               onChange={(e) => setSignerName(e.target.value)}
             />
@@ -139,7 +140,7 @@ function OutgoingMailSignPage() {
           <button className="app-button app-button--secondary" type="button" onClick={clearSignature}>
             Clear
           </button>
-          <button className="app-button app-button--primary" type="button" onClick={handleSubmit} disabled={saving}>
+          <button className="app-button app-button--primary" type="button" onClick={handleSubmit} disabled={saving || Boolean(message)}>
             {saving ? "Saving..." : "Save Signature"}
           </button>
         </div>

@@ -1,3 +1,4 @@
+import ProtectedRoute from "./components/ProtectedRoute";
 import { Navigate, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RoleSelectPage from "./pages/RoleSelectPage";
@@ -29,24 +30,24 @@ function App() {
       <Route path="/require-role" element={<RoleSelectPage />} />
       <Route path="/select-role" element={<RoleSelectPage />} />
       <Route path="/admin/login" element={<AdminLoginPage />} />
-      <Route path="/admin" element={<AdminDashboardPage />} />
-      <Route path="/admin/password" element={<AdminPasswordPage />} />
-      <Route path="/admin/add-executive" element={<AddExecutivePage />} />
-      <Route path="/admin/executives/new" element={<AddExecutivePage />} />
-      <Route path="/admin/inbound-report" element={<AdminInboundReportPage />} />
-      <Route path="/admin/inbound-mails/:trackingNumber" element={<AdminEditInboundMailPage />} />
-      <Route path="/admin/outbound-report" element={<OutboundReportPage mode="admin" />} />
-      <Route path="/admin/outbound-mails" element={<AdminOutboundMailsPage />} />
-      <Route path="/admin/outbound-mails/:trackingNumber" element={<AdminEditOutboundMailPage />} />
+      <Route path="/admin" element={<ProtectedRoute allowedRole="admin"><AdminDashboardPage /></ProtectedRoute>} />
+      <Route path="/admin/password" element={<ProtectedRoute allowedRole="admin"><AdminPasswordPage /></ProtectedRoute>} />
+      <Route path="/admin/add-executive" element={<ProtectedRoute allowedRole="admin"><AddExecutivePage /></ProtectedRoute>} />
+      <Route path="/admin/executives/new" element={<ProtectedRoute allowedRole="admin"><AddExecutivePage /></ProtectedRoute>} />
+      <Route path="/admin/inbound-report" element={<ProtectedRoute allowedRole="admin"><AdminInboundReportPage /></ProtectedRoute>} />
+      <Route path="/admin/inbound-mails/:trackingNumber" element={<ProtectedRoute allowedRole="admin"><AdminEditInboundMailPage /></ProtectedRoute>} />
+      <Route path="/admin/outbound-report" element={<ProtectedRoute allowedRole="admin"><OutboundReportPage mode="admin" /></ProtectedRoute>} />
+      <Route path="/admin/outbound-mails" element={<ProtectedRoute allowedRole="admin"><AdminOutboundMailsPage /></ProtectedRoute>} />
+      <Route path="/admin/outbound-mails/:trackingNumber" element={<ProtectedRoute allowedRole="admin"><AdminEditOutboundMailPage /></ProtectedRoute>} />
       <Route path="/executive/login" element={<ExecutiveLoginPage />} />
-      <Route path="/executive" element={<ExecutiveDashboardPage />} />
-      <Route path="/incoming-mail" element={<IncomingMailPage />} />
-      <Route path="/executive/incoming-mail" element={<IncomingMailPage />} />
-      <Route path="/executive/inbound-report" element={<InboundReportPage />} />
-      <Route path="/executive/outbound-mail" element={<OutboundMailPage />} />
-      <Route path="/executive/edit-outbound" element={<ExecutiveEditOutboundPage />} />
-      <Route path="/executive/outbound-report" element={<OutboundReportPage />} />
-      <Route path="/outgoing-mail" element={<OutgoingMailPage />} />
+      <Route path="/executive" element={<ProtectedRoute allowedRole="executive"><ExecutiveDashboardPage /></ProtectedRoute>} />
+      <Route path="/incoming-mail" element={<ProtectedRoute allowedRole="executive"><IncomingMailPage /></ProtectedRoute>} />
+      <Route path="/executive/incoming-mail" element={<ProtectedRoute allowedRole="executive"><IncomingMailPage /></ProtectedRoute>} />
+      <Route path="/executive/inbound-report" element={<ProtectedRoute allowedRole="executive"><InboundReportPage /></ProtectedRoute>} />
+      <Route path="/executive/outbound-mail" element={<ProtectedRoute allowedRole="executive"><OutboundMailPage /></ProtectedRoute>} />
+      <Route path="/executive/edit-outbound" element={<ProtectedRoute allowedRole="executive"><ExecutiveEditOutboundPage /></ProtectedRoute>} />
+      <Route path="/executive/outbound-report" element={<ProtectedRoute allowedRole="executive"><OutboundReportPage /></ProtectedRoute>} />
+      <Route path="/outgoing-mail" element={<ProtectedRoute allowedRole="executive"><OutgoingMailPage /></ProtectedRoute>} />
       <Route
         path="/sign/outgoing/:draftId"
         element={<OutgoingMailPageSign />}

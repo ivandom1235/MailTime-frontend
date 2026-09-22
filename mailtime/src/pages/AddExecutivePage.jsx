@@ -60,7 +60,7 @@ function AddExecutivePage() {
           </div>
           <div className="app-form__group">
             <label htmlFor="executive-password-create">Password</label>
-            <input id="executive-password-create" name="password" type="password" placeholder="Password" value={form.password} onChange={handleChange} />
+            <input id="executive-password-create" name="password" type="password" minLength={15} maxLength={72} required placeholder="At least 15 characters" value={form.password} onChange={handleChange} />
           </div>
           <div className="app-form__group">
             <label htmlFor="executive-phone">Phone Number</label>

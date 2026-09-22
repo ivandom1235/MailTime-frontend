@@ -1,23 +1,23 @@
+import { getSessionToken } from '../services/session';
 import { Navigate } from "react-router-dom";
 
 function getActiveRoleName() {
   try {
-    return JSON.parse(localStorage.getItem("active_role") || "null")?.name || "";
-  } catch (error) {
+    return JSON.parse(sessionStorage.getItem("active_role") || "null")?.name || "";
+  } catch {
     return "";
   }
 }
 
 export default function ProtectedRoute({ allowedRole, children }) {
-  const token =
-    localStorage.getItem("session_token") || localStorage.getItem("auth_token");
+  const token = getSessionToken();
   const activeRoleName = getActiveRoleName();
 
   if (!token || activeRoleName !== allowedRole) {
-    localStorage.removeItem("auth_token");
-    localStorage.removeItem("session_token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("active_role");
+    sessionStorage.removeItem("auth_token");
+    sessionStorage.removeItem("session_token");
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("active_role");
     return <Navigate to="/login" replace />;
   }
 

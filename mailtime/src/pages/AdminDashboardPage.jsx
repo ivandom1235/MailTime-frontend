@@ -1,3 +1,4 @@
+import { logout, API_BASE_URL } from '../services/api';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../services/api';
@@ -12,7 +13,7 @@ const actions = [
 
 export default function AdminDashboardPage() {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user') || 'null');
+  const user = JSON.parse(sessionStorage.getItem('user') || 'null');
   const [executives, setExecutives] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -34,9 +35,16 @@ export default function AdminDashboardPage() {
     return () => { cancelled = true; };
   }, []);
 
-  function handleLogout() {
-    ['auth_token', 'session_token', 'user', 'active_role', 'tenant'].forEach(key => localStorage.removeItem(key));
-    navigate('/login', { replace: true });
+  async function handleLogout() {
+    try { await logout(); navigate('/login', { replace: true }); }
+    catch { setError('Could not sign out. Please try again.'); }
+  }
+
+  async function connectMail() {
+    try {
+      const response = await api.post('/auth/microsoft/start', {});
+      window.location.assign(`${API_BASE_URL}${response.authorizationPath}`);
+    } catch (failure) { setError(failure.message || 'Could not start mail connection'); }
   }
 
   const query = search.trim().toLowerCase();
@@ -69,6 +77,7 @@ export default function AdminDashboardPage() {
             <span className="section-heading__note">6 tools</span>
           </div>
           <Link className="app-button app-button--primary dashboard-add" to="/admin/executives/new"><Icon name="plus" /> Add Executive</Link>
+          <button type="button" className="app-button app-button--secondary" onClick={connectMail}>Connect notification email</button>
           <div className="dashboard-action-grid">
             {actions.map(action => (
               <Link className="app-action-card" to={action.to} key={action.to}>

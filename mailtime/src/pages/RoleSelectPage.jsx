@@ -6,7 +6,7 @@ import "./styles/role-select.css";
 
 function RoleSelectPage() {
   const navigate = useNavigate();
-  const tenant = JSON.parse(localStorage.getItem("tenant") || "null");
+  const tenant = JSON.parse(sessionStorage.getItem("tenant") || "null");
 
   useEffect(() => {
     if (!tenant?.slug) {

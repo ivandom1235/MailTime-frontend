@@ -1,3 +1,4 @@
+import { escapeCsvValue } from "../services/csv";
 import { Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import api from "../services/api";
@@ -51,15 +52,6 @@ function formatDateTime(value) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
   return date.toLocaleString();
-}
-
-function escapeCsvValue(value) {
-  if (value === null || value === undefined) return "";
-
-  const text = String(value);
-  const safeText = /^[=+\-@\t\r]/.test(text) ? `'${text}` : text;
-
-  return `"${safeText.replaceAll('"', '""')}"`;
 }
 
 function downloadRowsAsCsv(rows, filename) {
@@ -182,6 +174,7 @@ export default function AdminInboundReportPage() {
       <header className="app-card__header">
         <h1>Inbound Mail Report</h1>
       </header>
+      <p>Reports and exports include up to 1,000 records. Narrow the filters for larger reports.</p>
 
       <form
         onSubmit={handleApplyFilters}

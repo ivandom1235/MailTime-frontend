@@ -1,7 +1,8 @@
+import PrivateSignature from "../components/PrivateSignature";
 // frontend/mailtime/src/pages/OutgoingMailPage.jsx
 import { useEffect, useState } from "react";
 import { QRCodeCanvas } from "qrcode.react";
-import api, { API_BASE_URL } from "../services/api";
+import api from "../services/api";
 import BackButton from "../components/BackButton";
 
 function formatStatusLabel(status) {
@@ -307,11 +308,7 @@ function OutgoingMailPage() {
           {draft.signaturePath && (
             <div className="app-panel app-panel--nested">
               <h3>Signature Preview</h3>
-              <img
-                className="app-signature-image"
-                src={`${API_BASE_URL}${draft.signaturePath}`}
-                alt="Signature"
-              />
+              <PrivateSignature path={draft.signaturePath} />
               <p><strong>Signed By:</strong> {draft.signerName}</p>
               <p><strong>Signed At:</strong> {draft.signedAt}</p>
             </div>

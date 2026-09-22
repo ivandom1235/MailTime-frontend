@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { logout } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
 import Icon from '../components/Icon';
 
@@ -12,15 +14,17 @@ const actions = [
 
 export default function ExecutiveDashboard() {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user') || 'null');
+  const [error, setError] = useState('');
+  const user = JSON.parse(sessionStorage.getItem('user') || 'null');
 
-  function handleLogout() {
-    ['auth_token', 'session_token', 'user', 'active_role', 'tenant'].forEach(key => localStorage.removeItem(key));
-    navigate('/login', { replace: true });
+  async function handleLogout() {
+    try { await logout(); navigate('/login', { replace: true }); }
+    catch { setError('Could not sign out. Please try again.'); }
   }
 
   return (
     <div className="dashboard">
+      {error && <p role="alert" className="app-message app-message--error">{error}</p>}
       <section className="dashboard-welcome" aria-labelledby="dashboard-heading">
         <span className="app-badge">Executive Access</span>
         <h1 id="dashboard-heading">WMS Executive Dashboard</h1>

@@ -1,3 +1,4 @@
+import { getSessionToken } from '../services/session';
 // frontend/src/pages/LoginPage.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,9 +13,8 @@ function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const token =
-      localStorage.getItem("session_token") || localStorage.getItem("auth_token");
-    const activeRole = JSON.parse(localStorage.getItem("active_role") || "null");
+    const token = getSessionToken();
+    const activeRole = JSON.parse(sessionStorage.getItem("active_role") || "null");
 
     if (!token) return;
 
@@ -39,11 +39,11 @@ function LoginPage() {
     try {
       const res = await api.post("/auth/company-login", { tenantSlug });
 
-      localStorage.removeItem("auth_token");
-      localStorage.removeItem("session_token");
-      localStorage.removeItem("user");
-      localStorage.removeItem("active_role");
-      localStorage.setItem("tenant", JSON.stringify(res.tenant));
+      sessionStorage.removeItem("auth_token");
+      sessionStorage.removeItem("session_token");
+      sessionStorage.removeItem("user");
+      sessionStorage.removeItem("active_role");
+      sessionStorage.setItem("tenant", JSON.stringify(res.tenant));
 
       navigate("/select-role", { replace: true });
     } catch (err) {
